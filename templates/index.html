@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movie Analysis</title>
+</head>
+
+<body>
+    <h4>Find the details and review about the movies </h4>
+    <form method="post" id="movie_form">
+        <input type="text" name="name" id="name" placeholder="Search the movie name" autocomplete="off">
+        <ul id="suggestions"></ul>
+        <button type="submit">Search</button>
+    </form>
+    <ul id="movieList"></ul>
+    <script>
+        const input = document.getElementById("name");
+        const suggestions = document.getElementById("suggestions");
+
+        const API_KEY = "api-key"; // keep your key here
+
+        input.addEventListener("input", () => {
+            const query = input.value.trim();
+
+            suggestions.innerHTML = "";
+
+            if (!query) return;
+
+            // Fetch movies dynamically based on input
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`)
+                .then(res => res.json())
+                .then(data => {
+                    const movies = data.results;
+                    movies.forEach(movie => {
+                        const li = document.createElement("li");
+                        li.textContent = movie.title;
+
+                        li.addEventListener("click", () => {
+                            input.value = movie.title;
+                            input.dataset.movieId = movie.id; // store ID
+                            suggestions.innerHTML = "";
+                        });
+
+                        suggestions.appendChild(li);
+                    });
+                })
+                .catch(err => console.error(err));
+        });
+
+        // Submit to backend
+        document.getElementById("movie_form").addEventListener("submit", e => {
+            e.preventDefault();
+
+            const movieId = input.dataset.movieId;
+
+            if (!movieId) {
+                alert("Please select a valid movie from suggestions");
+                return;
+            }
+
+            fetch("/get_movie", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id: movieId })
+            })
+                .then(res => res.json())
+                .then(response => {
+                    const movie_data = response.data;
+                    const list = document.getElementById("movieList");
+
+                    list.innerHTML = ""; // ✅ clear previous result
+
+                    const li = document.createElement('li');
+
+                    li.innerHTML = ` 
+                        <strong>${movie_data.movie_name}</strong><br>
+                        Runtime: ⏱ ${movie_data.runtime} mins<br>
+                        Rating: ⭐ ${movie_data.rating}<br>
+                        Review Score: 📊 ${movie_data.review_score}<br>
+                        Verdict: <b>${movie_data.verdict}</b><br>
+                        Plot:${movie_data.overview}
+        `;
+
+                    list.appendChild(li);
+                })
+                .catch(err => console.error(err));
+        });
+    </script>
+</body>
+
+</html>

@@ -81,9 +81,10 @@ Final Score = mean(review_score, overview_score, rating / 10)
 ---
 
 ## 📂 Project Structure
+```
 Movie-Sentiment-Analyzer/
 ├── app.py
-├──models/
+├── models/
 │ ├── ann.py
 │ ├── ann_training.py
 │ ├── ann_model.py
@@ -91,9 +92,9 @@ Movie-Sentiment-Analyzer/
 │ ├── tfidf.pkl
 │ └── requirements.txt
 ├── templates/
-│ └── index.html  
+│ └── index.html
 └── README.md
-
+```
 ## 🔄 Model Switching
 
 By default, the Flask app uses the **Transformer pipeline**.

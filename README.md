@@ -81,25 +81,20 @@ Final Score = mean(review_score, overview_score, rating / 10)
 ---
 
 ## 📂 Project Structure
-
-```
-movie-sentiment-analyzer/
-│
+Movie-Sentiment-Analyzer/
 ├── app.py
+├──models/
+│ ├── ann.py
+│ ├── ann_training.py
+│ ├── ann_model.py
+│ ├── pipeline.py
+│ ├── tfidf.pkl
+│ └── requirements.txt
 ├── templates/
-│   └── index.html
-│
-├── model/
-│   ├── pipeline.py
-│   └── reveiew_analysis_ann.py
-│
-├── data/
-│   └── IMDB Dataset.csv
-│
+│ └── index.html
+|──dataset
+│ └──imdb.txt   
 └── README.md
-```
-
----
 
 ## 🔄 Model Switching
 
@@ -165,10 +160,4 @@ overview_score = ann_model(Overview)
 
 ---
 
-## 🔐 Notes
-
-* API keys should be stored securely using environment variables (`.env`)
-* TMDB API is used for fetching movie data and reviews
-
----
 

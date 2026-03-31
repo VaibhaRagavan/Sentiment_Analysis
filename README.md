@@ -159,5 +159,6 @@ overview_score = ann_model(Overview)
 * Verdict: **Not Worth Watching**
 
 ---
-
+### Dataset
+* 📥 Download the dataset [here](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)
 

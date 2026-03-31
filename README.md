@@ -91,9 +91,7 @@ Movie-Sentiment-Analyzer/
 │ ├── tfidf.pkl
 │ └── requirements.txt
 ├── templates/
-│ └── index.html
-|──dataset
-│ └──imdb.txt   
+│ └── index.html  
 └── README.md
 
 ## 🔄 Model Switching
@@ -159,6 +157,10 @@ overview_score = ann_model(Overview)
 * Verdict: **Not Worth Watching**
 
 ---
-### Dataset
-* 📥 Download the dataset [here](https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews)
+ ## 📥 Dataset
 
+This project uses the **IMDB 50k Movie Reviews** dataset from Kaggle.
+
+Download it here: https://www.kaggle.com/datasets/lakshmi25npathi/imdb-dataset-of-50k-movie-reviews/data
+
+After downloading, place the CSV in a `dataset/` folder before running the app.
